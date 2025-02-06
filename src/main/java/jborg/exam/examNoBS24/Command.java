@@ -1,6 +1,8 @@
 package jborg.exam.examNoBS24;
 
+import org.springframework.http.ResponseEntity;
+
 public interface Command <O, I>
 {
-	public O execute(I input);
+	public ResponseEntity<O> execute(I input);
 }

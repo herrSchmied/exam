@@ -26,7 +26,7 @@ public class SearchProductService implements Query<List<ProductDTO>, String>
 	public ResponseEntity<List<ProductDTO>> execute(String input)
 	{
 
-		List<Product> list = productRepository.findByCategoryOrDescriptionContaining(input);
+		List<Product> list = productRepository.findByNameOrDescriptionContaining(input);
 		List<ProductDTO> dtoList = new ArrayList<>();
 		
 		for(Product p: list)dtoList.add(new ProductDTO(p));

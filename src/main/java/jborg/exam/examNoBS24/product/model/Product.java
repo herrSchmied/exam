@@ -1,11 +1,14 @@
 package jborg.exam.examNoBS24.product.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jborg.exam.examNoBS24.product.exceptions.ProductNotValideException;
 import lombok.Data;
 
 @Entity
@@ -25,7 +28,7 @@ public class Product
 	private String description;
 	
 	@Column(name="price")
-	private double price;
+	private Double price;
 	
 	@Column(name="manufacturer")
 	private String manufacturer;
@@ -42,4 +45,18 @@ public class Product
 	@Column(name="region")
 	@Enumerated(EnumType.STRING)
 	private Region region;
+	
+	public Product(Double price, Region region, String...args)
+	{
+		if(args.length<4)throw new ProductNotValideException("Product Constructor parameter not valide.");
+		this.Id = UUID.randomUUID().toString();
+		this.price = price;
+		this.created_timestamp = System.currentTimeMillis();
+		this.up_dated_timestamp = null;
+		this.region = region;
+		this.name = args[0];
+		this.description = args[1];
+		this.manufacturer = args[2];
+		this.category = args[3];
+	}
 }

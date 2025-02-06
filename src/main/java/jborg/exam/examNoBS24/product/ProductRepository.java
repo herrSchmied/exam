@@ -16,7 +16,7 @@ import jborg.exam.examNoBS24.product.model.Product;
 public interface ProductRepository extends JpaRepository<Product, String>
 {
 	//JPQL
-	@Query("SELECT p FROM Product p WHERE p.category LIKE %:keyword% OR p.description LIKE %:keyword%")
-	List<Product> findByCategoryOrDescriptionContaining(@Param("keyword") String name);
+	@Query("SELECT p FROM Product p WHERE p.name LIKE %:keyword% OR p.description LIKE %:keyword%")
+	List<Product> findByNameOrDescriptionContaining(@Param("keyword") String name);
 }
 

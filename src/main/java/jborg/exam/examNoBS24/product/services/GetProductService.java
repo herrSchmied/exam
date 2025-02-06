@@ -2,6 +2,7 @@ package jborg.exam.examNoBS24.product.services;
 
 import java.util.Optional;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ public class GetProductService implements Query<ProductDTO, String>
 	}
 
 	@Override
+	@Cacheable("productCache")
 	public ResponseEntity<ProductDTO> execute(String input)
 	{
 		
