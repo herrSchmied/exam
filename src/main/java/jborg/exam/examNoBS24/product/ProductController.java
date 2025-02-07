@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
 import jborg.exam.examNoBS24.product.model.SortByCode;
-import jborg.exam.examNoBS24.product.services.CreateProductService;
-import jborg.exam.examNoBS24.product.services.GetProductService;
-import jborg.exam.examNoBS24.product.services.GetProductsOrderedService;
-import jborg.exam.examNoBS24.product.services.GetProductsService;
-import jborg.exam.examNoBS24.product.services.SearchProductService;
-import jborg.exam.examNoBS24.product.services.UpdateProductService;
+import jborg.exam.examNoBS24.product.services.commands.CreateProductService;
+import jborg.exam.examNoBS24.product.services.commands.UpdateProductService;
+import jborg.exam.examNoBS24.product.services.querys.GetProductService;
+import jborg.exam.examNoBS24.product.services.querys.GetProductsOrderedService;
+import jborg.exam.examNoBS24.product.services.querys.GetProductsService;
+import jborg.exam.examNoBS24.product.services.querys.SearchProductService;
 
 
 

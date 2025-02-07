@@ -1,25 +1,31 @@
-package jborg.exam.examNoBS24.product.services;
+package jborg.exam.examNoBS24.product.services.commands;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import jborg.exam.examNoBS24.Command;
 import jborg.exam.examNoBS24.product.ProductRepository;
 import jborg.exam.examNoBS24.product.ProductValidator;
+import jborg.exam.examNoBS24.product.exceptions.ProductNotValideException;
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
 import jborg.exam.examNoBS24.product.model.Region;
+import jborg.exam.examNoBS24.product.services.Command;
+import jborg.exam.examNoBS24.profanityFilter.Config;
+import jborg.exam.examNoBS24.profanityFilter.service.ProfanityService;
 
 @Service
 public class CreateProductService implements Command<ProductDTO, ProductDTO>
 {
 
 	private ProductRepository productRepository;
+	private ProfanityService profanityService;
+
 	
-	
-	public CreateProductService(ProductRepository productRepository)
+	public CreateProductService(ProductRepository productRepository,
+								ProfanityService profanityService)
 	{
 		this.productRepository = productRepository;
+		this.profanityService = profanityService;
 	}
 
 
@@ -36,7 +42,13 @@ public class CreateProductService implements Command<ProductDTO, ProductDTO>
 		
 		Product toBeSaved = new Product(price, region, name, description, manufacturer, category);
 		
-		ProductValidator.validate(toBeSaved);
+		String msg = ProductValidator.validate(toBeSaved);
+		
+		boolean nameIsProfane = profanityService.execute(toBeSaved.getName()).getBody();
+		boolean descriptionIsProfane = profanityService.execute(toBeSaved.getName()).getBody();
+		
+		if(nameIsProfane||descriptionIsProfane)throw new ProductNotValideException("Profanity.");
+
 		
 		productRepository.save(toBeSaved);
 		

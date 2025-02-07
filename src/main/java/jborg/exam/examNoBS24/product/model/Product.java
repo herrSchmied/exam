@@ -2,6 +2,8 @@ package jborg.exam.examNoBS24.product.model;
 
 import java.util.UUID;
 
+import org.springframework.context.annotation.Bean;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -59,4 +61,7 @@ public class Product
 		this.manufacturer = args[2];
 		this.category = args[3];
 	}
+	
+	public Product()
+	{}
 }

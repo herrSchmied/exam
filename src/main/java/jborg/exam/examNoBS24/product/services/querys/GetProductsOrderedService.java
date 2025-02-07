@@ -1,4 +1,4 @@
-package jborg.exam.examNoBS24.product.services;
+package jborg.exam.examNoBS24.product.services.querys;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import jborg.exam.examNoBS24.Query;
 import jborg.exam.examNoBS24.product.ProductRepository;
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
 import jborg.exam.examNoBS24.product.model.SortByCode;
+import jborg.exam.examNoBS24.product.services.Query;
 
 @Service
 public class GetProductsOrderedService implements Query<List<ProductDTO>, String>

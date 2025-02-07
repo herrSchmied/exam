@@ -30,5 +30,8 @@ public class ProductDTO
 		this.category = product.getCategory();
 		this.region = product.getRegion();
 	}
+	
+	public ProductDTO()
+	{}
 
 }

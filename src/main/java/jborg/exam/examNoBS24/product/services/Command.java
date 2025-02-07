@@ -1,4 +1,4 @@
-package jborg.exam.examNoBS24;
+package jborg.exam.examNoBS24.product.services;
 
 import org.springframework.http.ResponseEntity;
 

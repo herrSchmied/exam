@@ -1,13 +1,16 @@
 package jborg.exam.examNoBS24.product;
 
+
 import jborg.exam.examNoBS24.product.exceptions.ProductNotValideException;
 import jborg.exam.examNoBS24.product.model.Product;
-import jborg.exam.examNoBS24.product.model.Region;
+import jborg.exam.examNoBS24.profanityFilter.Config;
+
 
 public class ProductValidator
 {
 
-	public static void validate(Product product)
+
+	public static String validate(Product product)
 	{
 		
 		nullCheck(product, "Product");		
@@ -15,9 +18,11 @@ public class ProductValidator
 		nullCheck(product.getId(), "Id");
 		if(!(product.getId().trim().length()==36))throw new ProductNotValideException("Id of Product not valide.");
 		
+		nullCheck(product.getName(), "name");
+		if(product.getName().trim().equals(""))throw new ProductNotValideException("Name can not be white space only.");
+		
 		nullCheck(product.getDescription(), "Description");
 		if(!(product.getDescription().trim().length()>19))throw new ProductNotValideException("Description too short.");
-
 
 		nullCheck(product.getPrice(), "Price");
 		if(!(product.getPrice()>0.0))throw new ProductNotValideException("Price is Zero or below.");
@@ -34,6 +39,7 @@ public class ProductValidator
 		
 		nullCheck(product.getRegion(), "Region");
 		
+		return "OK";		
 	}
 	
 	private static void nullCheck(Object obj, String name)

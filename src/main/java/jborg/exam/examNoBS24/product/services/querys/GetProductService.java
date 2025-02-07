@@ -1,4 +1,4 @@
-package jborg.exam.examNoBS24.product.services;
+package jborg.exam.examNoBS24.product.services.querys;
 
 import java.util.Optional;
 
@@ -6,10 +6,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
-import jborg.exam.examNoBS24.Query;
 import jborg.exam.examNoBS24.product.ProductRepository;
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
+import jborg.exam.examNoBS24.product.services.Query;
 
 @Repository
 public class GetProductService implements Query<ProductDTO, String>
