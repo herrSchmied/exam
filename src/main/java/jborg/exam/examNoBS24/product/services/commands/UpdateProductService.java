@@ -2,6 +2,8 @@ package jborg.exam.examNoBS24.product.services.commands;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import jborg.exam.examNoBS24.profanityFilter.service.ProfanityService;
 public class UpdateProductService implements Command<ProductDTO, Product>
 {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	private ProductRepository productRepository;
 	private ProfanityService profanityService;
 
@@ -33,6 +36,7 @@ public class UpdateProductService implements Command<ProductDTO, Product>
 	public ResponseEntity<ProductDTO> execute(Product input)
 	{
 
+		logger.info("Executing UpdateProductService");
 		Optional<Product> opOld = productRepository.findById(input.getId());
 		
 		if(opOld.isPresent())

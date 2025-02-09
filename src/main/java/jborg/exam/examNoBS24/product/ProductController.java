@@ -20,6 +20,7 @@ import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
 import jborg.exam.examNoBS24.product.model.SortByCode;
 import jborg.exam.examNoBS24.product.services.commands.CreateProductService;
+import jborg.exam.examNoBS24.product.services.commands.DeleteProductService;
 import jborg.exam.examNoBS24.product.services.commands.UpdateProductService;
 import jborg.exam.examNoBS24.product.services.querys.GetProductService;
 import jborg.exam.examNoBS24.product.services.querys.GetProductsOrderedService;
@@ -40,13 +41,15 @@ public class ProductController
 	private GetProductsOrderedService getProductsOrderedService;
 	private CreateProductService createProductService;
 	private UpdateProductService updateProductService;
+	private DeleteProductService deleteProductService;
 	
 	public ProductController(GetProductsService getProductsService, 
 			GetProductService getProductService, 
 			SearchProductService searchProductService,
 			GetProductsOrderedService getProductsOrderedService,
 			CreateProductService createProductService,
-			UpdateProductService updateProductService
+			UpdateProductService updateProductService,
+			DeleteProductService deleteProductService
 			)
 	{
 		this.getProductService = getProductService;
@@ -55,6 +58,7 @@ public class ProductController
 		this.getProductsOrderedService = getProductsOrderedService;
 		this.createProductService = createProductService;
 		this.updateProductService = updateProductService;
+		this.deleteProductService = deleteProductService;
 	}
 
 	@GetMapping("/products")
@@ -92,5 +96,11 @@ public class ProductController
 	public ResponseEntity<ProductDTO> updateProduct(@RequestBody Product product)
 	{
 		return updateProductService.execute(product);
+	}
+	
+	@PutMapping("/delete_product")
+	public ResponseEntity<String> deleteProduct(@RequestBody String id)
+	{
+		return deleteProductService.execute(id);
 	}
 }

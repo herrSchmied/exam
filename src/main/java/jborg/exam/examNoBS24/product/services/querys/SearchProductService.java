@@ -3,6 +3,8 @@ package jborg.exam.examNoBS24.product.services.querys;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import jborg.exam.examNoBS24.product.services.Query;
 public class SearchProductService implements Query<List<ProductDTO>, String>
 {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	private ProductRepository productRepository;
 
 	public SearchProductService(ProductRepository productRepository)
@@ -25,6 +29,8 @@ public class SearchProductService implements Query<List<ProductDTO>, String>
 	@Override
 	public ResponseEntity<List<ProductDTO>> execute(String input)
 	{
+		
+		logger.info("Executing Search Products Service");
 
 		List<Product> list = productRepository.findByNameOrDescriptionContaining(input);
 		List<ProductDTO> dtoList = new ArrayList<>();
