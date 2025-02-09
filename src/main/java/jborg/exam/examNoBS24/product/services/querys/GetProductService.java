@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import jborg.exam.examNoBS24.product.ProductRepository;
+import jborg.exam.examNoBS24.product.exceptions.ProductNotFoundException;
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
 import jborg.exam.examNoBS24.product.services.Query;
@@ -43,7 +44,7 @@ public class GetProductService implements Query<ProductDTO, String>
 			return ResponseEntity.ok(dto);
 		}
 		
-		throw new RuntimeException("Product Not Found!");
+		throw new ProductNotFoundException();
 	}
 
 }
