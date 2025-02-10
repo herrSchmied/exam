@@ -50,7 +50,11 @@ public class ProfanityService implements Query<Boolean, String>
 		try
 		{
 			ResponseEntity<ProfanityData> response = restTemplate.exchange(uri, HttpMethod.GET, entity, ProfanityData.class);
-
+			boolean profane = response.getBody().isHas_profanity();
+			if(profane)System.out.println(text + " is Profane");
+			else System.out.println(text + " is not Profane");
+			
+			
 			//CatFactResponse response = restTemplate.getForObject("https://catfact.ninja/fact?max_length="+i, CatFactResponse.class);
 			
 			return ResponseEntity.ok(response.getBody().isHas_profanity());

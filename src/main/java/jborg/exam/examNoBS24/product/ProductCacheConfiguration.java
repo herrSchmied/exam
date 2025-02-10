@@ -13,12 +13,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/*
 @Configuration
 @EnableCaching
 @EnableScheduling
+*/
 public class ProductCacheConfiguration
 {
 
+	/*
 	@Bean//Gets injected into the Spring Container using dependency injection.
 	public CacheManager cacheManager()
 	{
@@ -36,4 +39,5 @@ public class ProductCacheConfiguration
 	{
 		System.out.println("Evicting Product Cache");
 	}
+	*/
 }

@@ -11,7 +11,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jborg.exam.examNoBS24.product.exceptions.ProductNotValideException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="product")
@@ -47,19 +49,21 @@ public class Product
 	@Column(name="region")
 	@Enumerated(EnumType.STRING)
 	private Region region;
-	
-	public Product(Double price, Region region, String...args)
+
+	public Product(String Id, String name, String description, Double price, 
+			String manufacturer, String category, Long created_timestamp, 
+			Long up_dated_timestamp, Region region) 
 	{
-		if(args.length<4)throw new ProductNotValideException("Product Constructor parameter not valide.");
-		this.Id = UUID.randomUUID().toString();
+
+		this.Id = Id;
+		this.name = name;
+		this.description = description;
 		this.price = price;
-		this.created_timestamp = System.currentTimeMillis();
-		this.up_dated_timestamp = null;
+		this.manufacturer = manufacturer;
+		this.category = category;
+		this.created_timestamp = created_timestamp;
+		this.up_dated_timestamp = up_dated_timestamp;
 		this.region = region;
-		this.name = args[0];
-		this.description = args[1];
-		this.manufacturer = args[2];
-		this.category = args[3];
 	}
 	
 	public Product()

@@ -8,7 +8,7 @@ import java.util.List;
 
 
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jborg.exam.examNoBS24.product.model.Product;
 import jborg.exam.examNoBS24.product.model.ProductDTO;
+import jborg.exam.examNoBS24.product.model.ProductUpdateObject;
 import jborg.exam.examNoBS24.product.model.SortByCode;
 import jborg.exam.examNoBS24.product.services.commands.CreateProductService;
 import jborg.exam.examNoBS24.product.services.commands.DeleteProductService;
@@ -92,15 +93,17 @@ public class ProductController
 		return createProductService.execute(dto);
 	}
 	
-	@PutMapping("/product")
-	public ResponseEntity<ProductDTO> updateProduct(@RequestBody Product product)
+	@PutMapping("/product/{Id}")
+	public ResponseEntity<ProductDTO> updateProduct(@PathVariable String Id, @RequestBody ProductDTO dto)
 	{
-		return updateProductService.execute(product);
+		
+		ProductUpdateObject puo = new ProductUpdateObject(Id, dto);
+		return updateProductService.execute(puo);
 	}
 	
-	@PutMapping("/delete_product")
-	public ResponseEntity<String> deleteProduct(@RequestBody String id)
+	@DeleteMapping("/delete/{Id}")
+	public ResponseEntity<String> deleteProduct(@PathVariable String Id)
 	{
-		return deleteProductService.execute(id);
+		return deleteProductService.execute(Id);
 	}
 }

@@ -1,5 +1,7 @@
 package jborg.exam.examNoBS24.product.services.commands;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +40,28 @@ public class CreateProductService implements Command<ProductDTO, ProductDTO>
 		
 		logger.info("Executing CreateProductService");
 
-		Double price = dto.getPrice();
-		Region region = dto.getRegion();
+		String id = UUID.randomUUID().toString();
 		String name = dto.getName();
+		Double price = dto.getPrice();
 		String description = dto.getDescription();
 		String manufacturer = dto.getManufacturer();
 		String category = dto.getCategory();
+		Long created_timestamp = System.currentTimeMillis();
+		Long up_dated_timestamp = null;
+		Region region = dto.getRegion();
 		
-		Product toBeSaved = new Product(price, region, name, description, manufacturer, category);
-		
+		Product toBeSaved = new Product();
+
+		toBeSaved.setId(id);
+		toBeSaved.setName(name);
+		toBeSaved.setPrice(price);
+		toBeSaved.setDescription(description);
+		toBeSaved.setManufacturer(manufacturer);
+		toBeSaved.setCategory(category);
+		toBeSaved.setCreated_timestamp(created_timestamp);
+		toBeSaved.setUp_dated_timestamp(up_dated_timestamp);
+		toBeSaved.setRegion(region);
+
 		String msg = ProductValidator.validate(toBeSaved);
 		
 		boolean nameIsProfane = profanityService.execute(toBeSaved.getName()).getBody();

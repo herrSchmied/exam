@@ -25,15 +25,12 @@ public class ProductValidatorTests
 		String category = "Familie";
 		Region region = Region.Canada;
 		
-		Product product = new Product(price, region, name, description, manufacturer, category);
+		Product product = new Product();
 
-		
 		String check = ProductValidator.validate(product);
 		assert(check.equals("OK"));
-	
 	}
-	
-	
+
 	@Test
 	public void notValideProduct_validated_ProductNotValideExceptionThrownTest()
 	{
@@ -44,7 +41,7 @@ public class ProductValidatorTests
 		String category = "Familie";
 		Region region = Region.Canada;
 		
-		Product product = new Product(price, region, name, description, manufacturer, category);
+		Product product = new Product();
 
 		
 		Exception exception =assertThrows(ProductNotValideException.class, ()->

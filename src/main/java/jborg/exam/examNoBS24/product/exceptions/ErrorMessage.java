@@ -3,8 +3,7 @@ package jborg.exam.examNoBS24.product.exceptions;
 public enum ErrorMessage
 {
 
-	product_not_Found("Product not Found."),
-	product_not_valide("Product not valide.");
+	product_not_Found("Product not Found.");
 	
 	private String message;
 	
