@@ -36,6 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService
 			
 			CustomUser user = opUser.get();
 			
+			String role = user.getRolename();
 			
 			//Here would be the place for Roles and authorities. Maybe
 			//thru a Database.
@@ -44,6 +45,7 @@ public class CustomUserDetailsService implements UserDetailsService
 			return User
 					.withUsername(user.getUsername())
 					.password(user.getPassword())
+					.roles(role)
 					.build();
 		}
 

@@ -1,6 +1,7 @@
 package jborg.exam.examNoBS24.security;
 
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,4 +28,7 @@ public class CustomUser
 
 	@Column(name="password")
 	private String password;
+	
+	@Column(name = "rolename")
+	private String rolename;
 }
