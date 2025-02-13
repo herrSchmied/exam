@@ -11,18 +11,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="custom_user")
+@Table(name="customer")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CustomUser
 {
-
-	public CustomUser()
-	{
-		
-	}
 	
 	@Id
 	@Column(name="username")
@@ -32,8 +29,8 @@ public class CustomUser
 	@Column(name="password")
 	private String password;
 		
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roles_rolename")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rolename")
     private Roles role;
 
 }
