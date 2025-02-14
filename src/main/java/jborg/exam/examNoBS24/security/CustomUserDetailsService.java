@@ -36,16 +36,17 @@ public class CustomUserDetailsService implements UserDetailsService
 			
 			CustomUser user = opUser.get();
 			
-			String role = user.getRole().toString();
-			
+			String role = user.getRole().getRolename();
+			System.out.println(("loadUserByName Role: " + role));
+			System.out.println("Password: " + user.getPassword());
 			//Here would be the place for Roles and authorities. Maybe
 			//thru a Database.
 			
 			
 			return User
 					.withUsername(user.getUsername())
-					.password(user.getPassword())
 					.roles(role)
+					.password(user.getPassword())
 					.build();
 		}
 

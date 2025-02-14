@@ -24,6 +24,7 @@ public class SecurityConfiguration
 	{
 		return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class).build();
 	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder()
 	{
@@ -40,7 +41,7 @@ public class SecurityConfiguration
 					
 					authorize.requestMatchers("/login").permitAll();
 					
-					//It must be always possible to create new User....
+					//These must be always possible
 					authorize.requestMatchers("/createuser").permitAll();
 					authorize.requestMatchers("/products").permitAll();
 					authorize.requestMatchers(HttpMethod.GET, "/product/{Id}").permitAll();
