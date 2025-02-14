@@ -37,6 +37,7 @@ public class LoginController
 	{
 		
 		logger.info("Login user: " + user.getUsername());
+		logger.info("Role: " + user.getRole());
 		
 		//This is not a jsonwebtoken!!!
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken

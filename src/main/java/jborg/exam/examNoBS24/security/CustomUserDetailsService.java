@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService
 			
 			CustomUser user = opUser.get();
 			
-			String role = user.getRole().getRolename();
+			String role = user.getRole().toString();
 			
 			//Here would be the place for Roles and authorities. Maybe
 			//thru a Database.
