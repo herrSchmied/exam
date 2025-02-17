@@ -50,17 +50,8 @@ public class CreateProductService implements Command<ProductDTO, ProductDTO>
 		Long up_dated_timestamp = null;
 		Region region = dto.getRegion();
 		
-		Product toBeSaved = new Product();
-
-		toBeSaved.setId(id);
-		toBeSaved.setName(name);
-		toBeSaved.setPrice(price);
-		toBeSaved.setDescription(description);
-		toBeSaved.setManufacturer(manufacturer);
-		toBeSaved.setCategory(category);
-		toBeSaved.setCreated_timestamp(created_timestamp);
-		toBeSaved.setUp_dated_timestamp(up_dated_timestamp);
-		toBeSaved.setRegion(region);
+		Product toBeSaved = new Product(id, name, description, price, manufacturer, category,
+				created_timestamp, up_dated_timestamp, region);
 
 		String msg = ProductValidator.validate(toBeSaved);
 		

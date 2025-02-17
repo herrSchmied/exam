@@ -75,10 +75,10 @@ public class ProductController
 		return getProductService.execute(Id);
 	}
 
-	@GetMapping("/pSearch/{Id}")
-	public ResponseEntity<List<ProductDTO>> searchProduct(@PathVariable String Id)
+	@GetMapping("/pSearch/{searchStr}")
+	public ResponseEntity<List<ProductDTO>> searchProduct(@PathVariable String searchStr)
 	{	
-		return searchProductService.execute(Id);
+		return searchProductService.execute(searchStr);
 	}
 
 	@GetMapping("/pSort/{Id}")
@@ -88,15 +88,17 @@ public class ProductController
 		return getProductsOrderedService.execute(Id);
 	}
 	
-	@PostMapping("/product")
 	@PreAuthorize("hasRole('basicuser') or hasRole('admin')")
+	@PostMapping("/createproduct")
 	public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO dto)
 	{
+		
+		System.out.println("Hi");
 		return createProductService.execute(dto);
 	}
 	
-	@PutMapping("/product/{Id}")
 	@PreAuthorize("hasRole('basicuser') or hasRole('admin')")
+	@PutMapping("/product/{Id}")
 	public ResponseEntity<ProductDTO> updateProduct(@PathVariable String Id, @RequestBody ProductDTO dto)
 	{
 		
@@ -104,8 +106,8 @@ public class ProductController
 		return updateProductService.execute(puo);
 	}
 	
-	@DeleteMapping("/delete/{Id}")
 	@PreAuthorize("hasRole('admin')")
+	@DeleteMapping("/delete/{Id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable String Id)
 	{
 		return deleteProductService.execute(Id);

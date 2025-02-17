@@ -2,9 +2,11 @@ package jborg.exam.examNoBS24.security.jwt;
 
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import io.jsonwebtoken.Claims;
@@ -14,15 +16,20 @@ import io.jsonwebtoken.security.Keys;
 
 public class JWTUtil
 {
-	public static String generateToken(User user)
+	public static String generateToken(User userDetails)
 	{
+		String role = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(",")); // Extract role(s)
 		
 		return Jwts
 				.builder()
-				.subject(user.getUsername())
+				.claim("role", role)
+				.subject(userDetails.getUsername())
 				.expiration(new Date(System.currentTimeMillis()+3000000))
 				.signWith(getSigningKey())
 				.compact();
+		
 	}
 
 	public static Claims getClaims(String token)
