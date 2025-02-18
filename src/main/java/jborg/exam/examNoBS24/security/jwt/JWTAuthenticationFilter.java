@@ -43,8 +43,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter
 			System.out.println("Hi inside setting authentication to SecurityContextHolder");
 
 			String username = JWTUtil.getClaims(token).getSubject();
-			String role = JWTUtil.getClaims(token).get("role", String.class);
-			System.out.println(role);
+			String role = "ROLE_" + JWTUtil.getClaims(token).get("role", String.class);
+			System.out.println("Hi again role: " + role);
 			List<GrantedAuthority> list = new ArrayList<>();
 			list.add(new SimpleGrantedAuthority(role));
 			
