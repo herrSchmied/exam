@@ -33,14 +33,14 @@ public class CreateUserController
 		{
 			String name = user.getUsername();
 			String pw = encoder.encode(user.getPassword());
+			Roles role = user.getRole();
 			
 			//Default Constructor ist nur da wenn man entweder:
 			// 1.) gar keinen Constructor angibt.
 			// 2.) eine Constructor explicit ohne parameter.
 			//Das scheint eine Regel für Entities zu sein!!!!!
-			CustomUser toBeSaved = new CustomUser();
-			toBeSaved.setUsername(name);
-			toBeSaved.setPassword(pw);
+			CustomUser toBeSaved = new CustomUser(name, pw, role);
+			
 			customUserRepository.save(toBeSaved);
 			
 			return ResponseEntity.ok("Success");
