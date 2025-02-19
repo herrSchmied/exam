@@ -12,7 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import jborg.exam.examNoBS24.product.ProductRepository;
@@ -23,17 +26,19 @@ import jborg.exam.examNoBS24.product.services.commands.CreateProductService;
 import jborg.exam.examNoBS24.profanityFilter.service.ProfanityService;
 
 
+@SpringBootTest
 public class CreateProductServiceTest
 {
 
 	@Mock
 	ProductRepository productRepository;
 	
-	@InjectMocks
-	CreateProductService createProductService;
-	
 	@Mock
 	ProfanityService profanityService;
+	
+	@InjectMocks
+	CreateProductService createProductService;
+
 	
 	@BeforeEach
 	public void setup()
@@ -61,14 +66,14 @@ public class CreateProductServiceTest
 		ProductDTO dto = new ProductDTO(product);
 		
 		//Is still part of the 'given' setup. Despite calling 'when'.
-		when(productRepository.findById(Id)).thenReturn(Optional.of(product));
-
+		when(profanityService.execute(dto.getDescription())).thenReturn(ResponseEntity.ok(false));
+		when(profanityService.execute(dto.getName())).thenReturn(ResponseEntity.ok(false));
+		
 		//when
 		ResponseEntity<ProductDTO> response = createProductService.execute(dto);
 		
 		//Then
 		assertEquals(ResponseEntity.ok(new ProductDTO(product)), response);
-		verify(productRepository, times(1)).findById(Id);
-
+		verify(profanityService, times(2)).execute(Mockito.anyString());
 	}
 }

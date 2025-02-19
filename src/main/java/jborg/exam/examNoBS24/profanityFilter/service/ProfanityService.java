@@ -54,9 +54,7 @@ public class ProfanityService implements Query<Boolean, String>
 			if(profane)System.out.println(text + " is Profane");
 			else System.out.println(text + " is not Profane");
 			
-			
-			//CatFactResponse response = restTemplate.getForObject("https://catfact.ninja/fact?max_length="+i, CatFactResponse.class);
-			
+						
 			return ResponseEntity.ok(response.getBody().isHas_profanity());
 
 		}
